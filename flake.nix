@@ -9,7 +9,10 @@
   outputs =
     inputs@{ flake-parts, nixpkgs, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" "aarch64-linux" ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
 
       perSystem =
         { pkgs, ... }:
@@ -44,7 +47,10 @@
               cargoLock = {
                 lockFile = ./zebra-crosslink/Cargo.lock;
               };
-              cargoBuildFlags = [ "--package" "zebrad" ];
+              cargoBuildFlags = [
+                "--package"
+                "zebrad"
+              ];
               nativeBuildInputs = commonNativeBuildInputs;
               buildInputs = commonBuildInputs;
 
@@ -61,13 +67,22 @@
           checks.zebrad-lib-tests = mkZebradDerivation {
             pname = "zebrad-lib-tests";
             doCheck = true;
-            cargoTestFlags = [ "--package" "zebrad" "--lib" ];
+            cargoTestFlags = [
+              "--package"
+              "zebrad"
+              "--lib"
+            ];
           };
 
           checks.zebrad-config-tests = mkZebradDerivation {
             pname = "zebrad-config-tests";
             doCheck = true;
-            cargoTestFlags = [ "--package" "zebrad" "--test" "config" ];
+            cargoTestFlags = [
+              "--package"
+              "zebrad"
+              "--test"
+              "config"
+            ];
           };
 
           devShells.default = pkgs.mkShell {
