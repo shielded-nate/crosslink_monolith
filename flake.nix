@@ -45,8 +45,15 @@
               version = "0.0.0";
               src = zebraSrc;
               cargoRoot = "zebra-crosslink";
+              buildAndTestSubdir = "zebra-crosslink";
               cargoLock = {
                 lockFile = ./zebra-crosslink/Cargo.lock;
+                # `core2` is pulled in via a git dependency (it was yanked from
+                # crates.io upstream). This lets nixpkgs vendor it using
+                # `builtins.fetchGit` against the rev already pinned in
+                # `Cargo.lock`, instead of requiring a separately maintained
+                # `outputHashes` hash literal here.
+                allowBuiltinFetchGit = true;
               };
               cargoBuildFlags = [
                 "--package"
