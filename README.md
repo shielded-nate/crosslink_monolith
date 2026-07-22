@@ -6,12 +6,14 @@ This is a rapidly changing repository used for prototyping and testnets. In the 
 
 A subtree'd monorepo for all crosslink code/dependencies
 
+Note: all commands assume the current directory is the repo working tree root.
+
 ## Build Instructions
 
 The monolith currently has no top-level build command. The documented build target is `zebrad` from the `zebra-crosslink` workspace:
 
 ```bash
-cargo build --manifest-path /home/runner/work/crosslink_monolith/crosslink_monolith/zebra-crosslink/Cargo.toml --locked --package zebrad
+cargo build --manifest-path zebra-crosslink/Cargo.toml --locked --package zebrad
 ```
 
 `nix build` runs this same build process through the root `flake.nix`.
@@ -23,13 +25,13 @@ The documented automated test processes are:
 1. Zebrad library tests:
 
    ```bash
-   cargo test --manifest-path /home/runner/work/crosslink_monolith/crosslink_monolith/zebra-crosslink/Cargo.toml --locked --package zebrad --lib
+   cargo test --manifest-path zebra-crosslink/Cargo.toml --locked --package zebrad --lib
    ```
 
 2. Zebrad config integration test:
 
    ```bash
-   cargo test --manifest-path /home/runner/work/crosslink_monolith/crosslink_monolith/zebra-crosslink/Cargo.toml --locked --package zebrad --test config
+   cargo test --manifest-path zebra-crosslink/Cargo.toml --locked --package zebrad --test config
    ```
 
 `nix flake check` exposes and runs a distinct derivation for each of the two test commands above.
